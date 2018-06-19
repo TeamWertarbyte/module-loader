@@ -1,0 +1,25 @@
+{
+  "name": "@wertarbyte/module-loader",
+  "version": "0.0.0",
+  "description": "Load modules dynamically",
+  "main": "distribution/index.js",
+  "scripts": {
+    "build": "babel src -d distribution",
+    "prepare": "babel src -d distribution"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TeamWertarbyte/module-loader.git"
+  },
+  "author": "Wertarbyte GmbH",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TeamWertarbyte/module-loader/issues"
+  },
+  "homepage": "https://github.com/TeamWertarbyte/module-loader#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  }
+}
