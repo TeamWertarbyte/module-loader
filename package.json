@@ -1,6 +1,6 @@
 {
   "name": "@wertarbyte/module-loader",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Load modules dynamically",
   "main": "distribution/index.js",
   "scripts": {
