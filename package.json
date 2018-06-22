@@ -2,10 +2,10 @@
   "name": "@wertarbyte/module-loader",
   "version": "0.1.3",
   "description": "Load modules dynamically",
-  "main": "distribution/index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "build": "babel src -d distribution",
-    "prepare": "babel src -d distribution"
+    "build": "babel src -d lib",
+    "prepare": "babel src -d lib"
   },
   "repository": {
     "type": "git",
