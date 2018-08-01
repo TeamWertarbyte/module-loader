@@ -97,17 +97,12 @@ Let's assume our module `contact` has:
 ![Module](module.jpeg)
 
 ```javascript
+import {createModule} from '@wertarbyte/module-loader';
 import * as actions from './actions';
 import reducers from './reducers';
 import routes from './routes';
-import {createModule} from '@wertarbyte/module-loader';
 
-const module = createModule('contact');
-module.actions = actions;
-module.reducers = reducers;
-module.routes = routes;
-
-export default module;
+export default createModule('contact', { actions, reducers, routes });
 ```
 
 ### Entry File
@@ -121,9 +116,6 @@ import configureStore, {createReducer} from './configureStore';
 
 const store = configureStore({}, history);
 
-const context = {
-  store,
-};
 
 const app = createApp({
   store,
