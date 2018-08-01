@@ -1,4 +1,10 @@
 export default class App {
+  /**
+   * Create a new app.
+   * @param {object} context The context of the app
+   * @param {object} context.store The redux store
+   * @param {function} context.replaceReducers A function that gets an object of reducers and replaces the current reducers with the new ones
+   */
   constructor(context) {
     if (!context) {
       const message = 'Context is required when creating a new app.';
@@ -56,12 +62,11 @@ export default class App {
     };
 
     if (module.reducers) {
-      this.context.store.injectReducer(module.name, module.reducers);
-      const reducers = module.reducers || {};
       this.reducers = {
         ...this.reducers,
-        [module.name]: reducers,
+        [module.name]: module.reducers,
       };
+      this.context.replaceReducers(this.reducers);
     }
 
     if (module.routes) {

@@ -68,7 +68,7 @@ Note how we add `asyncReducers` in the `createReducer` method and add them dynam
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
 import {routerMiddleware, routerReducer} from 'react-router-redux';
 
-const createReducer = asyncReducers =>
+export const createReducer = asyncReducers =>
   combineReducers({
     routing: routerReducer,
     ...asyncReducers,
@@ -76,22 +76,13 @@ const createReducer = asyncReducers =>
 
 export default function(initialState, browserHistory) {
   const routermw = routerMiddleware(browserHistory);
-  const store = createStore(
+  return createStore(
     createReducer(),
     initialState,
     process.env.NODE_ENV !== 'production' && window.devToolsExtension
       ? compose(applyMiddleware(routermw), window.devToolsExtension())
       : compose(applyMiddleware(routermw)),
   );
-
-  store.asyncReducers = {};
-  store.injectReducer = (key, reducer) => {
-    store.asyncReducers[key] = reducer;
-    store.replaceReducer(createReducer(store.asyncReducers));
-    return store;
-  };
-
-  return store;
 }
 ```
 
@@ -125,6 +116,7 @@ Load modules, init the app and mount your modules to get started
 
 ```javascript
 import {createApp} from '@wertarbyte/module-loader';
+import configureStore, {createReducer} from './configureStore';
 ...
 
 const store = configureStore({}, history);
@@ -133,7 +125,12 @@ const context = {
   store,
 };
 
-const app = createApp(context);
+const app = createApp({
+  store,
+  replaceReducers: (reducers) => {
+    store.replaceReducer(createReducer(reducers));
+  },
+});
 app.loadModule(Core);
 app.loadModule(Home);
 app.loadModule(Contact);
